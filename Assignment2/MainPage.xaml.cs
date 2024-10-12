@@ -23,30 +23,50 @@ namespace Assignment2
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public async void Mes(string message)
+        {
+            var mes = new ContentDialog()
+            {
+                Content = message,
+                CloseButtonText = "OK"
+            };
+            await mes.ShowAsync();
+        }
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        private async void PasteData(object sender, RoutedEventArgs e)
+        private void PasteData(object sender, RoutedEventArgs e)
         {
-            var mes = new MessageDialog("You've entered: " + txtName.Text);
+            Mes("You've entered: " + txtName.Text);
             txtBlock.Text = txtName.Text;
-            await mes.ShowAsync();
         }
 
-        private async void SwitchToggle(object sender, RoutedEventArgs e)
+        private void SwitchToggle(object sender, RoutedEventArgs e)
         {
             if (switchTog.IsOn)
             {
-                var mes = new MessageDialog("Power is now ON");
-                await mes.ShowAsync();
+                Mes("Power is now ON");
             }
             else
             {
-                var mes = new MessageDialog("Power is now OFF");
-                await mes.ShowAsync();
+                Mes("Power is now OFF");
             }
+        }
+
+        private void Copy(object sender, RoutedEventArgs e)
+        {
+            Mes("Data Copied Successfully");
+        }
+        private void Paste(object sender, RoutedEventArgs e)
+        {
+            Mes("Data Pasted Successfully");
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(NextPage));
         }
     }
 }
